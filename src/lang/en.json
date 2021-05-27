@@ -1,0 +1,12 @@
+{
+  "login": "Login",
+  "loginSuccess": "Login Success",
+  "loginFailed": "Login failed ({message})",
+  "username": "Username",
+  "password": "Password",
+  "forgotPassword": "Forgot Password",
+  "loggedIn": "Logged In",
+  "waiting": "Waiting...",
+  "spanish": "Spanish",
+  "english": "English"
+}

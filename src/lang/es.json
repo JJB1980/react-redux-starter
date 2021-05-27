@@ -1,0 +1,12 @@
+{
+  "login": "Acceso",
+  "loginSuccess": "Inicio de sesión exitoso",
+  "loginFailed": "error de inicio de sesion ({message})",
+  "username": "Nombre de usuario",
+  "password": "Contraseña",
+  "forgotPassword": "Has olvidado tu contraseña",
+  "loggedIn": "Conectado",
+  "waiting": "Esperando...",
+  "spanish": "Español",
+  "english": "Inglés"
+}
