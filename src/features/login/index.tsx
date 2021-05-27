@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { IResponse } from '../../index.d'
 import LangSelect from '../../components/Language/Selector';
 import AsyncButton from '../../components/AsyncButton';
+import LinkButton from '../../components/LinkButton';
 import logo from '../page/logo.svg';
 import { asyncLogin, loggedIn } from './redux';
 import TextInput from '../../components/TextInput'
@@ -43,7 +44,7 @@ function LoginPage() {
           <TextInput value={state.username} label='username' onChange={(value: string) => setState({...state, username: value || ''})} />
           <TextInput password value={state.password} label='password' onChange={(value: string) => setState({...state, password: value || ''})} />
           <AsyncButton onClick={doLogin} messageId='login' />
-          <S.Link href='#'><FormattedMessage id='forgotPassword' /></S.Link>
+          <LinkButton color='blue' onClick={() => console.log('forgot password')} messageId='forgotPassword' />
         </form>
         <LangSelect />
       </S.Form>

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { FormattedMessage } from 'react-intl'
 
+import LinkButton from '../LinkButton';
 import { LanguageContext } from './Context';
 import * as S from './styled';
 
@@ -9,8 +9,9 @@ export default function LanguageSelector(): JSX.Element {
 
 	return (
 		<S.LocalesContainer>
-			<S.LocaleOption onClick={() => setLocale('es')}><FormattedMessage id='spanish' /></S.LocaleOption>
-			<S.LocaleOption onClick={() => setLocale('en')}><FormattedMessage id='english' /></S.LocaleOption>
+			<LinkButton onClick={() => setLocale('es')} color='red' messageId='spanish' />
+			<S.Pad>|</S.Pad>
+			<LinkButton onClick={() => setLocale('en')} color='red' messageId='english' />
 		</S.LocalesContainer>
 	);
 }
