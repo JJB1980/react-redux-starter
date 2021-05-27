@@ -25,11 +25,11 @@ if (process.env.NODE_ENV !== 'production' && module?.['hot']) {
   module['hot'].accept([
     loginHot,
     apiHot
-  ], () => store.replaceReducer(rootReducer as any))
+  ], () => store.replaceReducer(rootReducer as any));
 }
 
 // run initialisers
-[apiInit].forEach(store.dispatch)
+[apiInit].forEach(store.dispatch);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

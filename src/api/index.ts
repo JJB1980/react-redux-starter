@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 // import { AuthResponse } from 'ag-models';
 // import { getApiEndpoints } from 'ag-api';
-import { IResponse } from '../index.d'
+import { IResponse } from '../index.d';
 
 export const hot = '../api/index.ts';
 
@@ -36,10 +36,10 @@ export const counterSlice = createSlice({
       // state.endpoints = getApiEndpoints(state.appUrl);
     },
     failure: (state, action) => {
-      state.error = action.payload
+      state.error = action.payload;
     },
     status: (state, action) => {
-      state.status = action.payload
+      state.status = action.payload;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -80,23 +80,23 @@ export const callEndpoint = (api: string, method: string, body: any) => async (
     headers: { 'Content-Type': 'application/json', Accept: '*/*', 'Content-Encoding': 'gzip, deflate, br' },
     body: JSON.stringify(body)
   };
-  console.log('options :::', options)
+  console.log('options :::', options);
   try {
-    dispatch(status('loading'))
+    dispatch(status('loading'));
     const response = await fetch(
       `${url}/${api}`,
       options
     );
     await wait(2000);
-    const data: any = await response.json()
-    const value: IResponse = {status: 'success', data}
-    dispatch(status('idle'))
+    const data: any = await response.json();
+    const value: IResponse = { status: 'success', data };
+    dispatch(status('idle'));
     return value;
   } catch (e) {
     await wait(2000);
-    dispatch(failure(e.message))
-    dispatch(status('failed'))
-    const value: IResponse = {status: 'error', error: e.message}
+    dispatch(failure(e.message));
+    dispatch(status('failed'));
+    const value: IResponse = { status: 'error', error: e.message };
     return value;
   }
 };

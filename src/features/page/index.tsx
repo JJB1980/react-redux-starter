@@ -21,7 +21,7 @@ export default function App() {
         {loggedIn && (
           <nav>
             <ul>
-            <li>
+              <li>
                 <Link to="/">Home</Link>
               </li>
               <li>
@@ -39,24 +39,24 @@ export default function App() {
         <Switch>
           {loggedIn ? (
             <>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/users">
-              <Users />
-            </Route>
-            <Route path="/">
-              <Demo />
-            </Route>
-          </>
-        ) : (
-          <>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Redirect to='/login' />
-          </>
-        )}
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/users">
+                <Users />
+              </Route>
+              <Route path="/">
+                <Demo />
+              </Route>
+            </>
+          ) : (
+            <>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Redirect to='/login' />
+            </>
+          )}
         </Switch>
       </div>
     </Router>

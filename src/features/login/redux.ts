@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { AuthResponse } from 'ag-models';
-import { CallEndpoint, IResponse } from '../../index.d'
+import { CallEndpoint, IResponse } from '../../index.d';
 
 export const hot = '../features/login/redux.ts';
 
@@ -31,17 +31,17 @@ export const counterSlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       // state.loggedIn = true;
-      state.response = action.payload
+      state.response = action.payload;
     },
     failure: (state, action) => {
       state.loggedIn = false;
-      state.error = action.payload
+      state.error = action.payload;
     },
     status: (state, action) => {
-      state.status = action.payload
+      state.status = action.payload;
     },
     loggedIn: (state) => {
-      state.loggedIn = true
+      state.loggedIn = true;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -74,10 +74,10 @@ export const selectError = (state: RootState) => state.login.error;
 export const asyncLogin = (username: string, password: string) => async (
   dispatch: Function, _: void, callEndpoint: CallEndpoint
 ): Promise<IResponse> => {
-  const response: IResponse = await dispatch(callEndpoint('api/Authenticate/V2.0/Web', 'POST', {username, password}));
-  if (response.data) dispatch(login(response.data))
-  else dispatch(failure(response.error))
-  return response
+  const response: IResponse = await dispatch(callEndpoint('api/Authenticate/V2.0/Web', 'POST', { username, password }));
+  if (response.data) dispatch(login(response.data));
+  else dispatch(failure(response.error));
+  return response;
 };
 
 export default counterSlice.reducer;

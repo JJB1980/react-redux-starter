@@ -1,6 +1,0 @@
-{
-  "plugins": ["formatjs"],
-  "rules": {
-    "formatjs/no-offset": "error"
-  }
-}

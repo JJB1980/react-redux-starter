@@ -1,6 +1,6 @@
-import {FormattedMessage} from 'react-intl'
+import { FormattedMessage } from 'react-intl';
 
-import { useAppSelector } from '../../app/hooks'
+import { useAppSelector } from '../../app/hooks';
 import { selectStatus } from '../../api';
 import * as S from './styled';
 
@@ -9,14 +9,14 @@ type Props = {
   onClick: Function;
 }
 
-function AsyncButton({messageId, onClick}: Props) {
+function AsyncButton({ messageId, onClick }: Props) {
   const status = useAppSelector(selectStatus);
 
   return (
     <S.LoginButton disabled={status === 'loading'} onClick={onClick as any}>
       {status === 'loading' ? <FormattedMessage id='waiting' /> : <FormattedMessage id={messageId} />}
     </S.LoginButton>
-);
+  );
 }
 
 export default AsyncButton;
