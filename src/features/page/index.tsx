@@ -11,7 +11,6 @@ import Login from '../login';
 import { selectIsLoggedIn } from '../login/redux';
 import { useAppSelector } from '../../app/hooks';
 
-
 export default function App() {
   const loggedIn = useAppSelector(selectIsLoggedIn);
 

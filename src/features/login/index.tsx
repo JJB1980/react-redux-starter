@@ -19,7 +19,6 @@ type State = {
 }
 
 function LoginPage() {
-
   const [state, setState] = useState<State>({ username: '', password: '' });
   const dispatch = useDispatch<any>();
   const history = useHistory();

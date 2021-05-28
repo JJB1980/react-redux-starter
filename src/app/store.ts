@@ -14,7 +14,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {
-        extraArgument: callEndpoint,
+        extraArgument: { callEndpoint },
       },
       serializableCheck: false,
     }),
@@ -29,7 +29,8 @@ if (process.env.NODE_ENV !== 'production' && module?.['hot']) {
 }
 
 // run initialisers
-[apiInit].forEach(store.dispatch);
+const p = [apiInit].map((init: any) => (store.dispatch(init())));
+Promise.all(p).then(() => console.log('inits done.')).catch((e) => console.log(`inits error: ${e}`));
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

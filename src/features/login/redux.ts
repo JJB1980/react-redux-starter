@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { AuthResponse } from 'ag-models';
-import { CallEndpoint, IResponse } from '../../index.d';
+import { ThunkArgs, IResponse } from '../../index.d';
 
 export const hot = '../features/login/redux.ts';
 
@@ -18,7 +18,6 @@ const initialState: LoginState = {
   error: '',
   response: {} as AuthResponse
 };
-
 
 export const counterSlice = createSlice({
   name: 'login',
@@ -72,7 +71,7 @@ export const selectError = (state: RootState) => state.login.error;
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 export const asyncLogin = (username: string, password: string) => async (
-  dispatch: Function, _: void, callEndpoint: CallEndpoint
+  dispatch: Function, _: void, { callEndpoint }: ThunkArgs
 ): Promise<IResponse> => {
   const response: IResponse = await dispatch(callEndpoint('api/Authenticate/V2.0/Web', 'POST', { username, password }));
   if (response.data) dispatch(login(response.data));

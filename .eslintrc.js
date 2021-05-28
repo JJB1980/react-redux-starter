@@ -46,7 +46,14 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-handler-names': 0,
-    'react/no-unused-prop-types': 0
+    'react/no-unused-prop-types': 0,
+    'no-multiple-empty-lines': ['error', { 'max': 1, 'maxEOF': 1, 'maxBOF': 0 }],
+    'padded-blocks': ['error', 'never'],
+    'space-before-function-paren': ['error', {
+      'anonymous': 'never',
+      'named': 'never',
+      'asyncArrow': 'always'
+    }]
   },
   'overrides': [
     {
