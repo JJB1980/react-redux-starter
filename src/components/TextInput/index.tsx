@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { v1 as uuid } from 'uuid';
+import { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import * as S from './styled';
@@ -12,7 +11,13 @@ type Props = {
 }
 
 function TextInput({ value, label, password, onChange }: Props) {
-  const [id] = useState<string>(uuid());
+  const [id, setId] = useState<string>();
+
+  useEffect(() => {
+    import('uuid').then(uuid => {
+      setId(uuid.v1());
+    });
+  }, []);
 
   return (
     <>

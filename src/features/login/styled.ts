@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import Color from 'color';
-
-export const ButtonColor = Color('#2323ca');
 
 export const Container = styled.div`
   position: relative;

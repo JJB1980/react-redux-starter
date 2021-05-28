@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,18 +7,22 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import Demo from './DemoPage';
-import Login from '../login';
+const Demo = lazy(() => import('./DemoPage'));
+const Login = lazy(() => import('../login'));
+const HomePage = lazy(() => import('../HomePage'));
+
 import { selectIsLoggedIn } from '../login/redux';
 import { useAppSelector } from '../../app/hooks';
 
+import * as S from './styled';
+
 export default function App() {
-  const loggedIn = useAppSelector(selectIsLoggedIn);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
     <Router>
       <div>
-        {loggedIn && (
+        {isLoggedIn && (
           <nav>
             <ul>
               <li>
@@ -35,28 +40,33 @@ export default function App() {
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          {loggedIn ? (
-            <>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/users">
-                <Users />
-              </Route>
-              <Route path="/">
-                <Demo />
-              </Route>
-            </>
-          ) : (
-            <>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Redirect to='/login' />
-            </>
-          )}
-        </Switch>
+        <Suspense fallback={<S.Container><S.Loader>Loading...</S.Loader></S.Container>}>
+          <Switch>
+            {isLoggedIn ? (
+              <>
+                <Route path="/about">
+                  <About />
+                </Route>
+                <Route path="/users">
+                  <Users />
+                </Route>
+                <Route path="/">
+                  <Demo />
+                </Route>
+              </>
+            ) : (
+              <>
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <Route path="/">
+                  <HomePage />
+                </Route>
+                <Redirect to='/' />
+              </>
+            )}
+          </Switch>
+        </Suspense>
       </div>
     </Router>
   );

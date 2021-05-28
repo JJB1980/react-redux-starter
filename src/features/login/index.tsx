@@ -12,6 +12,7 @@ import logo from '../page/logo.svg';
 import { asyncLogin, loggedIn } from './redux';
 import TextInput from '../../components/TextInput';
 import * as S from './styled';
+import * as G from '../../styled';
 
 type State = {
   username: string;
@@ -38,6 +39,9 @@ function LoginPage() {
 
   return (
     <S.Container>
+      <G.Padded>
+        <LinkButton to='/' messageId='homePage' />
+      </G.Padded>
       <S.Form>
         <S.Logo src={logo} alt='logo' />
         <form onSubmit={e => e.preventDefault()}>
