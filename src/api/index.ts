@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '../app/store';
-import { IResponse, IDispatch, IState } from '../index.d';
+import { IResponse, IDispatch, IState } from 'types';
+import { RootState } from 'app/store';
 
 export const hot = '../api/index.ts';
 
@@ -13,7 +13,7 @@ export interface ApiState {
 }
 
 const initialState: ApiState = {
-  appUrl: 'https://dev.api35.agunity.com',
+  appUrl: '',
   endpoints: {},
   status: 'idle',
   error: ''
@@ -67,7 +67,7 @@ export const callEndpoint = (api: string, method: string, body: any) => async (
     const value: IResponse = { status: 'success', data };
     dispatch(status('idle'));
     return value;
-  } catch (e) {
+  } catch (e: any) {
     await wait(2000);
     dispatch(failure(e.message));
     dispatch(status('failed'));

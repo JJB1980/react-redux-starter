@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { ThemeContext } from 'components/Theme/Context';
 import * as S from './styled';
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
 
 function TextInput({ value, label, password, onChange }: Props) {
   const [id, setId] = useState<string>();
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     import('uuid').then(uuid => {
@@ -22,8 +24,9 @@ function TextInput({ value, label, password, onChange }: Props) {
   return (
     <>
       <S.TextContainer>
-        <S.Label htmlFor={id}><FormattedMessage id={label} /></S.Label>
+        <S.Label theme={theme} htmlFor={id}><FormattedMessage id={label} /></S.Label>
         <S.Input
+          theme={theme}
           id={id}
           autoComplete={password ? 'password' : label.split(' ').join('-')}
           type={password ? 'password' : 'text'}

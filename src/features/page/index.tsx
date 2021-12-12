@@ -1,23 +1,25 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useContext } from 'react';
+import MediaQuery from 'react-responsive';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect
+  Link
 } from 'react-router-dom';
 
 const Demo = lazy(() => import('./DemoPage'));
-const Login = lazy(() => import('../login'));
 const HomePage = lazy(() => import('../HomePage'));
+const HomePageMobile = lazy(() => import('../HomePage/mobile'));
+const Login = lazy(() => import('../login'));
 
 import { selectIsLoggedIn } from '../login/redux';
-import { useAppSelector } from '../../app/hooks';
-
+import { ThemeContext } from 'components/Theme/Context';
+import { useAppSelector } from 'app/hooks';
 import * as S from './styled';
 
 export default function App() {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <Router>
@@ -40,7 +42,11 @@ export default function App() {
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Suspense fallback={<S.Container><S.Loader>Loading...</S.Loader></S.Container>}>
+        <Suspense fallback={
+          <S.Container theme={theme}>
+            <S.Loader>Loading...</S.Loader>
+          </S.Container>
+        }>
           <Switch>
             {isLoggedIn ? (
               <>
@@ -50,19 +56,23 @@ export default function App() {
                 <Route path="/users">
                   <Users />
                 </Route>
-                <Route path="/">
+                <Route path="/demo">
                   <Demo />
                 </Route>
               </>
             ) : (
               <>
-                <Route path="/login">
+                <Route exact path="/login">
                   <Login />
                 </Route>
-                <Route path="/">
-                  <HomePage />
+                <Route exact path="/">
+                  <MediaQuery minDeviceWidth={701}>
+                    <HomePage />
+                  </MediaQuery>
+                  <MediaQuery maxDeviceWidth={700}>
+                    <HomePageMobile />
+                  </MediaQuery>
                 </Route>
-                <Redirect to='/' />
               </>
             )}
           </Switch>

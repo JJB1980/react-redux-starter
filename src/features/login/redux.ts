@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
-// import { AuthResponse } from 'ag-models';
-import { ThunkArgs, IResponse } from '../../index.d';
+
+import { AuthResponse } from 'types/api';
+import { RootState } from 'app/store';
+import { ThunkArgs, IResponse } from 'types';
 
 export const hot = '../features/login/redux.ts';
 
@@ -9,14 +10,14 @@ export interface LoginState {
   loggedIn: boolean;
   status: 'idle' | 'loading' | 'failed';
   error: string;
-  response: any;
+  response: AuthResponse;
 }
 
 const initialState: LoginState = {
   loggedIn: false,
   status: 'idle',
   error: '',
-  response: {} as any
+  response: {} as AuthResponse
 };
 
 export const counterSlice = createSlice({

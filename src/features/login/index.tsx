@@ -1,18 +1,21 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useDispatch } from 'react-redux';
+import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { IResponse } from '../../index.d';
-import LangSelect from '../../components/Language/Selector';
-import AsyncButton from '../../components/AsyncButton';
-import LinkButton from '../../components/LinkButton';
-import logo from '../page/logo.svg';
 import { asyncLogin, loggedIn } from './redux';
-import TextInput from '../../components/TextInput';
+import { IResponse } from 'types';
+import { LanguageContext } from 'components/Language/Context';
+import { ThemeContext } from 'components/Theme/Context';
+import * as G from 'styled';
 import * as S from './styled';
-import * as G from '../../styled';
+import AsyncButton from 'components/AsyncButton';
+import LangSelect from 'components/Language/Selector';
+import LinkButton from 'components/LinkButton';
+import logo from '../page/logo.svg';
+import TextInput from 'components/TextInput';
 
 type State = {
   username: string;
@@ -21,8 +24,10 @@ type State = {
 
 function LoginPage() {
   const [state, setState] = useState<State>({ username: '', password: '' });
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch<Function>();
   const history = useHistory();
+  const { theme } = useContext(ThemeContext);
+  const { messages } = useContext(LanguageContext);
 
   const doLogin = async () => {
     const response: IResponse = await dispatch(asyncLogin(state.username, state.password));
@@ -38,17 +43,20 @@ function LoginPage() {
   };
 
   return (
-    <S.Container>
+    <S.Container theme={theme}>
+      <Helmet>
+        <title>{messages.login}</title>
+      </Helmet>
       <G.Padded>
         <LinkButton to='/' messageId='homePage' />
       </G.Padded>
-      <S.Form>
+      <S.Form theme={theme}>
         <S.Logo src={logo} alt='logo' />
         <form onSubmit={e => e.preventDefault()}>
           <TextInput value={state.username} label='username' onChange={(value: string) => setState({ ...state, username: value || '' })} />
           <TextInput password value={state.password} label='password' onChange={(value: string) => setState({ ...state, password: value || '' })} />
           <AsyncButton onClick={doLogin} messageId='login' />
-          <LinkButton color='blue' onClick={() => console.log('forgot password')} messageId='forgotPassword' />
+          <LinkButton onClick={() => console.log('forgot password')} messageId='forgotPassword' />
         </form>
         <LangSelect />
       </S.Form>

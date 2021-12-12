@@ -1,0 +1,8 @@
+{
+  "name": "light",
+  "Text": "black",
+  "BG": "white",
+  "Link": "blue",
+  "AltLink": "red",
+  "Button": "#2323ca"
+}

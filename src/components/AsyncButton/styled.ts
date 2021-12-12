@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import Color from 'color';
 
-export const ButtonColor = Color('#2323ca');
+import { ButtonColor } from 'styled';
 
 export const LoginButton = styled.button`
   padding: 1em;

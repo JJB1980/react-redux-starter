@@ -1,5 +1,5 @@
 import React from 'react';
 
-type T = { setLocale: Function, locale: string };
+type T = { setLocale: Function, locale: string, messages: any };
 
-export const LanguageContext = React.createContext<T>({ locale: '', setLocale: () => {} });
+export const LanguageContext = React.createContext<T>({ locale: '', messages: {}, setLocale: () => {} });

@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { useAppSelector } from '../../app/hooks';
 import { selectStatus } from '../../api';
+import { useAppSelector } from '../../app/hooks';
 import * as S from './styled';
 
 type Props = {

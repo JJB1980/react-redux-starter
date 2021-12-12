@@ -3,8 +3,8 @@ import { IntlProvider } from 'react-intl';
 
 import { LanguageContext } from './Context';
 
-import en from '../../lang/en.json';
-import es from '../../lang/es.json';
+import en from './langs/en.json';
+import es from './langs/es.json';
 
 const locales = {
   en,
@@ -22,7 +22,7 @@ export default function LanguageProvider({ children }): JSX.Element {
   };
 
   return (
-    <LanguageContext.Provider value={{ setLocale: updateLocale, locale }}>
+    <LanguageContext.Provider value={{ setLocale: updateLocale, locale, messages: locales[locale] }}>
       <IntlProvider messages={locales[locale]} locale={locale} defaultLocale="en">
 			  {children}
       </IntlProvider>

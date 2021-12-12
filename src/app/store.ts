@@ -1,7 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-import loginReducer, { hot as loginHot } from '../features/login/redux';
-import apiReducer, { init as apiInit, callEndpoint, hot as apiHot } from '../api';
+
+import apiReducer, { init as apiInit, callEndpoint, hot as apiHot } from 'api';
+import counterReducer from 'features/counter/counterSlice';
+import loginReducer, { hot as loginHot } from 'features/login/redux';
 
 const rootReducer = {
   counter: counterReducer,

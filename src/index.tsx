@@ -1,21 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import { HelmetProvider } from 'react-helmet-async';
+import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import ReactDOM from 'react-dom';
 
 import './index.css';
-import App from './features/page';
-import { store } from './app/store';
-import { Provider } from 'react-redux';
+import { store } from 'app/store';
 import * as serviceWorker from './serviceWorker';
-import LanguageProvider from './components/Language/Provider';
+import App from 'features/page';
+import LanguageProvider from 'components/Language/Provider';
+import ThemeProvider from 'components/Theme/Provider';
 
 ReactDOM.render(
   <React.StrictMode>
     <LanguageProvider>
       <ToastContainer />
       <Provider store={store}>
-        <App />
+        <HelmetProvider>
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
+        </HelmetProvider>
       </Provider>
     </LanguageProvider>
   </React.StrictMode>,
